@@ -1849,9 +1849,6 @@ with gr.Blocks(title="📚 EXAM_EPS - Smart Study Platform",
         outputs=[stat_study_time, stat_goals, stat_tasks, stat_notes])
 
 # Launch
-# PORT FIX: Add this at the very end of your file, replacing the existing launch code
-
-# Launch with automatic port detection
 if __name__ == "__main__":
     print("\n" + "=" * 60)
     print("🚀 EXAM_EPS - Smart Study Tracker")
@@ -1861,28 +1858,7 @@ if __name__ == "__main__":
     print(f"💾 Data Directory: {BASE_DIR}")
     print("\n" + "=" * 60 + "\n")
 
-    # Try ports 7860-7869 until one is available
-    launch_successful = False
-    for port in range(7860, 7870):
-        try:
-            print(f"🔍 Trying port {port}...")
-            app.launch(
-                server_name="0.0.0.0",
-                server_port=port,
-                share=True,
-                inbrowser=True
-            )
-            launch_successful = True
-            break
-        except OSError as e:
-            if "Cannot find empty port" in str(e) or "Address already in use" in str(e):
-                print(f"⚠️  Port {port} is busy, trying next port...")
-                continue
-            else:
-                raise  # Re-raise if it's a different error
-    
-    if not launch_successful:
-        print("\n❌ Could not find available port in range 7860-7869")
-        print("💡 Try running: pkill -f gradio")
-        print("   Or restart your environment")
+    app.launch(server_name="0.0.0.0",
+               server_port=7860,
+              )
 
